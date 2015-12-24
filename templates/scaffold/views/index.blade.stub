@@ -1,4 +1,7 @@
-@extends('app')
+@extends('layouts.app')
+
+@section('page_title', 'Carga de $MODEL_NAME_PLURAL$')
+@section('page_description', 'Listado de $MODEL_NAME_PLURAL$')
 
 @section('content')
 
@@ -8,14 +11,19 @@
 
         <div class="row">
             <h1 class="pull-left">$MODEL_NAME_PLURAL$</h1>
-            <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('$MODEL_NAME_PLURAL_CAMEL$.create') !!}">Add New</a>
+            <a class="btn btn-primary pull-right" style="margin-top: 25px" href="{!! route('$MODEL_NAME_PLURAL_CAMEL$.create') !!}">Crear Nuevo</a>
         </div>
 
         <div class="row">
             @if($$MODEL_NAME_PLURAL_CAMEL$->isEmpty())
-                <div class="well text-center">No $MODEL_NAME_PLURAL$ found.</div>
+                <div class="well text-center">No se encontraron $MODEL_NAME_PLURAL$.</div>
             @else
-                @include('$MODEL_NAME_PLURAL_CAMEL$.table')
+                <div class="box box-success">
+                    <div class="box-header ">
+                         <h3 class="box-title">Registros de $MODEL_NAME_PLURAL_CAMEL$</h3>
+                    </div>
+                        @include('$MODEL_NAME_PLURAL_CAMEL$.table')
+                </div>
             @endif
         </div>
 
@@ -23,3 +31,56 @@
 
     </div>
 @endsection
+@section('script')
+    <!-- DataTables -->
+    {!! Html::script('assets/DataTables/datatables.min.js') !!}
+    <script>
+        $(function () {
+            var table = $('#Table$MODEL_NAME_PLURAL_CAMEL$').DataTable({
+                "autoWidth": true,
+                "scrollX" : true,
+                "dom": 'frti<"bottom"plB><"clear">',
+                "language": {
+                    url: "assets/DataTables/Spanish.json",
+                    buttons: {
+                        copyTitle: "Copiado al Portapapeles",
+                        copyKeys: "Gracias"
+                    }
+                },
+                buttons: {
+                    dom: {
+                        container: {
+                            tag: 'ul',
+                            className: 'pull-right'
+                        },
+                        button: {
+                            tag: 'a',
+                            className: 'btn btn-primary'
+                        }
+                    },
+                buttons:  [{
+                    extend: 'colvis',
+                    text: 'Ocultar Columnas'
+                }, {
+                    extend: 'copyHtml5',
+                    text: 'Copiar'
+                },{
+                    extend: 'excelHtml5',
+                    text: 'A Excel',
+                    title: 'Tabla $MODEL_NAME_PLURAL_CAMEL$'
+                }, {
+                    extend: 'pdfHtml5',
+                    text: 'A PDF',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL',
+                    title: 'Tabla $MODEL_NAME_PLURAL_CAMEL$'
+                }
+                ]
+            }
+
+            });
+        });
+
+    </script>
+
+    @endsection

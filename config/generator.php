@@ -49,15 +49,15 @@ return [
     |
     */
 
-    'namespace_model'          => 'App\Models',
+    'namespace_model'          => 'LosCedros\Models',
 
-    'namespace_repository'     => 'App\Libraries\Repositories',
+    'namespace_repository'     => 'LosCedros\Libraries\Repositories',
 
-    'namespace_controller'     => 'App\Http\Controllers',
+    'namespace_controller'     => 'LosCedros\Http\Controllers',
 
-    'namespace_api_controller' => 'App\Http\Controllers\API',
+    'namespace_api_controller' => 'LosCedros\Http\Controllers\API',
 
-    'namespace_request'        => 'App\Http\Requests',
+    'namespace_request'        => 'LosCedros\Http\Requests',
 
     /*
     |--------------------------------------------------------------------------

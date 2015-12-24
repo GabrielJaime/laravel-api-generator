@@ -1,17 +1,27 @@
-<table class="table">
-    <thead>
-    $FIELD_HEADERS$
-    <th width="50px">Action</th>
-    </thead>
-    <tbody>
-    @foreach($$MODEL_NAME_PLURAL_CAMEL$ as $$MODEL_NAME_CAMEL$)
-        <tr>
-            $FIELD_BODY$
-            <td>
-                <a href="{!! route('$MODEL_NAME_PLURAL_CAMEL$.edit', [$$MODEL_NAME_CAMEL$->id]) !!}"><i class="glyphicon glyphicon-edit"></i></a>
-                <a href="{!! route('$MODEL_NAME_PLURAL_CAMEL$.delete', [$$MODEL_NAME_CAMEL$->id]) !!}" onclick="return confirm('Are you sure wants to delete this $MODEL_NAME$?')"><i class="glyphicon glyphicon-remove"></i></a>
-            </td>
-        </tr>
-    @endforeach
-    </tbody>
-</table>
+<div id="DivBodyTable$MODEL_NAME_PLURAL_CAMEL$" class="box-body" >
+    <table id="Table$MODEL_NAME_PLURAL_CAMEL$" class="table table-bordered table-striped table-hover dataTable" >
+        <thead>
+        <th width="50px">Acciones</th>
+        $FIELD_HEADERS$
+        </thead>
+        <tbody>
+        @foreach($$MODEL_NAME_PLURAL_CAMEL$ as $$MODEL_NAME_CAMEL$)
+            <tr>
+                <td>
+                    <a href="{!! route('$MODEL_NAME_PLURAL_CAMEL$.edit', [$$MODEL_NAME_CAMEL$->id]) !!}"><abbr title="Modificar"><i class="glyphicon glyphicon-edit"></i></abbr></a>
+                	&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                	<a href="{!! route('$MODEL_NAME_PLURAL_CAMEL$.delete', [$$MODEL_NAME_CAMEL$->id]) !!}" onclick="return confirm('Seguro de Elimnar este $MODEL_NAME$?')"><abbr title="Eliminar"><i class="glyphicon glyphicon-remove text-red"></i></abbr></a>
+                </td>
+                $FIELD_BODY$
+
+            </tr>
+        @endforeach
+        </tbody>
+        <tfoot>
+            <tr>
+                <th width="50px">Acciones</th>
+                $FIELD_HEADERS$
+             </tr>
+         </tfoot>
+    </table>
+</div>
